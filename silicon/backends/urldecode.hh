@@ -142,7 +142,7 @@ namespace sl
   }
 
   template <typename O>
-  std::string urldecode_check_missing_fields(const std::set<void*>& found, std::vector<O>& obj)
+  std::string urldecode_check_missing_fields(const std::set<void*>& /*found*/, std::vector<O>& /*obj*/)
   {
     // Fixme : implement missing fields checking in std::vector<sio<O...>>
     // for (int i = 0; i < obj.size(); i++)

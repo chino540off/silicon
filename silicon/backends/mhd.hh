@@ -61,7 +61,7 @@ namespace sl
 
   template <typename F>
   int mhd_keyvalue_iterator(void *cls,
-                            enum MHD_ValueKind kind,
+                            enum MHD_ValueKind /*kind*/,
                             const char *key, const char *value)
   {
     F& f = *(F*)cls;
@@ -141,7 +141,7 @@ namespace sl
       {
         c++;
         iod::static_if<is_symbol<decltype(m)>::value>(
-          [&] (auto m2) {
+          [&] (auto /*m2*/) {
             while (url[c] and url[c] != '/') c++;
           }, // skip.
           [&] (auto m2) {
@@ -195,7 +195,7 @@ namespace sl
     }
     
     template <typename P, typename T>
-    auto deserialize(request_type* r, P procedure, T& res) const
+    auto deserialize(request_type* r, P /*procedure*/, T& res) const
     {
       try
       {
@@ -239,7 +239,7 @@ namespace sl
         throw error::not_found("File not found.");
 
       // Read extension.
-      int c = path.size();
+      size_t c = path.size();
       while (c >= 1 and path[c - 1] != '.')
         c--;
       if (c > 1 and c < path.size())
@@ -321,7 +321,7 @@ namespace sl
                   struct MHD_Connection * connection,
                   const char * url,
                   const char * method,
-                  const char * version,
+                  const char * /*version*/,
                   const char * upload_data,
                   size_t * upload_data_size,
                   void ** ptr)
