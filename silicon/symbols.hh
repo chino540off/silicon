@@ -130,6 +130,16 @@
     iod_define_symbol(id)
 #endif
 
+#ifndef IOD_SYMBOL__id
+#define IOD_SYMBOL__id
+    iod_define_symbol(_id)
+#endif
+
+#ifndef IOD_SYMBOL_index
+#define IOD_SYMBOL_index
+    iod_define_symbol(index)
+#endif
+
 #ifndef IOD_SYMBOL_json
 #define IOD_SYMBOL_json
     iod_define_symbol(json)

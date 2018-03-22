@@ -4,6 +4,7 @@
 #include <sstream>
 #include <iod/utils.hh>
 #include <silicon/symbols.hh>
+#include <silicon/middlewares/utils.hh>
 
 namespace sl
 {
@@ -14,30 +15,6 @@ namespace sl
   
   namespace sql_orm_internals
   {
-    auto remove_members_with_attribute = [] (const auto& o, const auto& a)
-    {
-      typedef std::decay_t<decltype(a)> A; 
-      return foreach2(o) | [&] (auto& m)
-      {
-        typedef typename std::decay_t<decltype(m)>::attributes_type attrs;
-        return ::iod::static_if<!has_symbol<attrs, A>::value>(
-          [&] () { return m; },
-          [&] () {});
-      };
-    };
-
-    auto extract_members_with_attribute = [] (const auto& o, const auto& a)
-    {
-      typedef std::decay_t<decltype(a)> A; 
-      return foreach2(o) | [&] (auto& m)
-      {
-        typedef typename std::decay_t<decltype(m)>::attributes_type attrs;
-        return ::iod::static_if<has_symbol<attrs, A>::value>(
-          [&] () { return m; },
-          [&] () {});
-      };
-    };
-    
     template <typename T>
     using remove_auto_increment_t = decltype(remove_members_with_attribute(std::declval<T>(), _auto_increment));
     template <typename T>
